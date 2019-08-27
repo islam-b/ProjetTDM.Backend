@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const NewsService = require('./service');
 const newsService = new NewsService();
+var Pusher = require('pusher');
+var hash = require('object-hash');
+var channels_client = new Pusher({
+  appId: '850594',
+  key: '4a2d823b8c2dd69e64bd',
+  secret: 'a239dcecf3ffc7a334f3',
+  cluster: 'eu',
+  encrypted: true
+});
 
 
 FRnews = [];
@@ -37,10 +46,32 @@ router.get('/news',(req,res)=>{
 
 
 router.get('/categories',(req,res)=>{
-    let categories;
-    if (req.query.lang !== "FR") categories = newsService.getCategoriesAR();
-    else categories = newsService.getCategoriesFR();
+    let categories = newsService.getCategories();
     res.status(200).json(categories);
+});
+
+router.get('/sources',(req,res)=>{
+    let categories = newsService.getSources();
+    res.status(200).json(categories);
+});
+
+router.get('/post',(req,res)=>{
+    let news ={
+        imageUrl: 'http://www.sclance.com/pngs/no-image-png/no_image_png_935227.png',
+                                title: "hello",
+                                description: "hello world",
+                                link: "link",
+                                date: "10/10/2010",
+                                category: "Sport",
+                                lang: 'FR',
+                                source: 'El Watan'
+    }
+let keyevent = "CATEGORIE"+hash(news.category)
+let keychannel = "SOURCE"+hash(news.source)
+console.log(keyevent + "\n"+keychannel)
+channels_client.trigger(keychannel, keyevent, news);
+    news.idArticle = hash(news.link)
+    res.status(200).json(news);
 });
 
 

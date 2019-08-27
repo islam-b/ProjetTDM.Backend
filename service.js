@@ -6,64 +6,64 @@ const cheerio= require('cheerio');
 const defaultImageUrl = 'http://www.sclance.com/pngs/no-image-png/no_image_png_935227.png';
 const stripHtml = require("string-strip-html");
 const helper = require('./helper');
+const hash = require('object-hash');
 
 class NewsService {
 
 
-
-    getCategoriesFR() {
-        return [
+    getSources() {
+        let sources = [
             {
-                title:'Societe',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
-            },
-            {
-                title:'Sport',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                name:'El Watan',
+                lang:'FR'
             },{
-                title:'International',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                name:'Lierte',
+                lang:'FR'
             },{
-                title:'Economie',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                name:'L\'Expression',
+                lang:'FR'
             },{
-                title:'Culture',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                name:'الشروق',
+                lang:'AR'
             },{
-                title:'Automobile',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
-            },{
-                title:'Histoire',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
-            },{
-                title:'Divers',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                name:'الخبر',
+                lang:'AR'
             }
         ];
+        sources.forEach(s=>{s.idSource=hash(s.name);});
+        return sources;
     }
 
-    getCategoriesAR() {
-        return [
+    getCategories() {
+        let categories = [
             {
-                title:'مجتمع',
+                title_fr:'Societe',
+                title_ar:'مجتمع',
                 iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
             },{
-                title:'رياضة',
+                title_fr:'Sport',
+                title_ar:'رياضة',
                 iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
             },{
-                title:'اقتصاد',
+                title_fr:'Economie',
+                title_ar:'اقتصاد',
                 iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
             },{
-                title:'العالم',
+                title_fr:'International',
+                title_ar:'العالم',
                 iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
             },{
-                title:'ثقافة',
+                title_fr:'Culture',
+                title_ar:'ثقافة',
                 iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
             },{
-                title:'منوعات',
+                title_fr:'Divers',
+                title_ar:'منوعات',
                 iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
             }
         ];
+        categories.forEach(c=>{c.idCategory=hash(c.title_fr);});
+        return categories;
     }
 
     getElWatanNews(link,category) {
@@ -131,6 +131,7 @@ class NewsService {
                         Promise.all(promises).then(contents=>{
                             contents.forEach(content=>{
                                data[i].content = content;
+                                data[i].idArticle=hash(data[i].link);
                                i++;
                             });
                             done();
@@ -212,6 +213,7 @@ class NewsService {
                         Promise.all(promises).then(contents=>{
                             contents.forEach(content=>{
                                 data[i].content = content;
+                                data[i].idArticle=hash(data[i].link);
                                 i++;
                             });
                             done();
@@ -292,6 +294,7 @@ class NewsService {
                         Promise.all(promises).then(contents=>{
                             contents.forEach(content=>{
                                 data[i].content = content;
+                                data[i].idArticle=hash(data[i].link);
                                 i++;
                             });
                             done();
@@ -375,6 +378,7 @@ class NewsService {
                         Promise.all(promises).then(contents=>{
                             contents.forEach(content=>{
                                 data[i].content = content;
+                                data[i].idArticle=hash(data[i].link);
                                 i++;
                             });
                             done();
@@ -459,6 +463,7 @@ class NewsService {
                         Promise.all(promises).then(contents=>{
                             contents.forEach(content=>{
                                 data[i].content = content;
+                                data[i].idArticle=hash(data[i].link);
                                 i++;
                             });
                             done();
@@ -483,21 +488,19 @@ class NewsService {
         let promises = [];
         //El Watan
         promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/sports','Sport'));
-        promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/economie','Economie'));
+       /* promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/economie','Economie'));
         promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/culture','Culture'));
-        promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/international','International'));
+        promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/international','International'));*/
         //Liberte
         promises.push(this.getLiberteNews('https://www.liberte-algerie.com/culture','Culture'));
-        promises.push(this.getLiberteNews('https://www.liberte-algerie.com/sport','Sport'));
-        promises.push(this.getLiberteNews('https://www.liberte-algerie.com/automobile','Automobile'));
+       /* promises.push(this.getLiberteNews('https://www.liberte-algerie.com/sport','Sport'));
         promises.push(this.getLiberteNews('https://www.liberte-algerie.com/international','International'));
-        promises.push(this.getLiberteNews('https://www.liberte-algerie.com/histoire','Histoire'));
-        promises.push(this.getLiberteNews('https://www.liberte-algerie.com/magazine','Divers'));
+        promises.push(this.getLiberteNews('https://www.liberte-algerie.com/magazine','Divers'));*/
         //L'expression
-        promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/internationale','International'));
+       /* promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/internationale','International'));
         promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/sports','Sport'));
         promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/culture','Culture'));
-        promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/societe','Societe'));
+        promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/societe','Societe'));*/
         promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/economie','Economie'));
 
         return new Promise((resolve, reject) => {
