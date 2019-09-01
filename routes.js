@@ -18,17 +18,17 @@ var beams_client = new Pusher({
 
 FRnews = [];
 ARnews = [];
-/*newsService.getVideos().then(v=>{
+newsService.getVideos().then(v=>{
     console.log(v);
 }).catch(e=>{
 
-});*/
-newsService.getFrenchNews().then(articles=>{
+});
+/*newsService.getFrenchNews().then(articles=>{
     FRnews = articles;
     console.log("FINALLY"+FRnews.length);
 }).catch(e=>{
     FRnews = null;
-});
+});*/
 /*newsService.getArabicNews().then(articles=>{
     ARnews = articles;
     console.log("FINALLY"+ARnews.length);

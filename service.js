@@ -557,7 +557,7 @@ class NewsService {
     }
 
     getVideos() {
-        let link = "https://www.lexpressiondz.com/multimedia"
+        let link = "https://www.tsa-algerie.com/videos/";
         return new Promise((resolve,reject)=> {
             var c = new Crawler({
                 maxConnections: 10,
@@ -570,64 +570,70 @@ class NewsService {
                         let $ = res.$;
                         // $ is Cheerio by default
                         //a lean implementation of core jQuery designed specifically for the server
-                        let posts = HTMLParser.parse($(".list-categories").html());
+                        let posts = HTMLParser.parse($(".category__highlighted-grid").html());
                         let articles = posts.querySelectorAll('li');
+
                         let data = [];
                         let promises = [];
                         articles.forEach(article=> {
-                            let $$ = cheerio.load(article.toString(), {decodeEntities: false});
-                            let imageUrl = $$('img').attr('src');
-                            let title = $$('h2>a').html();
-                            let link = $$('h2>a').attr('href');
-                            let description = $$('p:last-child').text();
-                            $$('header>p>span>span').remove();
-                            let date = $$('header>p>span').text().replace('\n\n','')
-                                .replace('\n','').replace('00:00 | ','')
-                                .replace('-','/').replace('-','/');
-                            data.push({
-                                imageUrl: imageUrl ? imageUrl : defaultImageUrl,
-                                title: title,
-                                description: description,
-                                link: link,
-                                date: date,
-                                category: 'Video',
-                                lang: 'FR',
-                                source: 'Liberte'
 
-                            });
-                            promises.push(
-                                new Promise((resolve, reject) => {
-                                    var c2 = new Crawler({
-                                        maxConnections: 10,
-                                        // This will be called for each crawled page
-                                        callback: function (error, res, done) {
-                                            if (error) {
-                                                reject(error);
-                                            } else {
-                                                let $ = res.$;
-                                                let $$ = cheerio.load($('.image-featured').toString());
-                                                console.log($('.image-featured').toString());
-                                               // $$('#player_el').click();
-                                                let videoLink = $('#video-container>iframe').attr('src');
-                                                done();
-                                                resolve( videoLink);
+                            let $$ = cheerio.load(article.toString(), {decodeEntities: false});
+                            if (article.attributes.class === undefined) {
+                                let imageUrl = $$('article>a').attr('data-bg');
+                                let title = $$('h1>a').text();
+                                let link = $$('article>a').attr('href');
+
+                                data.push({
+                                    imageUrl: imageUrl ? imageUrl : defaultImageUrl,
+                                    title: title,
+                                    link: link,
+                                    category: 'Video',
+                                    lang: 'FR',
+                                    source: 'TSA',
+                                    content: ''
+
+                                });
+                                promises.push(
+                                    new Promise((resolve, reject) => {
+                                        var c2 = new Crawler({
+                                            maxConnections: 10,
+                                            // This will be called for each crawled page
+                                            callback: function (error, res, done) {
+                                                if (error) {
+                                                    reject(error);
+                                                } else {
+                                                    let $ = res.$;
+
+                                                    let vlink = $('.article__highlighted iframe').attr('src') || $('video>source').attr('src');
+                                                    let date = $('time').attr('datetime').toString();
+                                                    let d=new Date(date);
+                                                    let day = ("0"+ d.getDate()).slice(-2);
+                                                    let month = ("0"+ d.getMonth()).slice(-2);
+                                                    let formated = day+'/'+month+'/'+d.getFullYear();
+
+                                                    done();
+                                                    resolve({
+                                                        video:vlink,date:formated
+                                                    });
+                                                }
                                             }
-                                        }
-                                    });
-                                    c2.queue(link);
-                                })
-                            );
+                                        });
+                                        c2.queue(link);
+                                    })
+                                );
+                            }
                         });
                         let i=0;
                         Promise.all(promises).then(contents=>{
-                            contents.forEach(l=>{
-                                data[i].videoLink = l;
+                            contents.forEach(obj=>{
+                                data[i].description = obj.video;
+                                data[i].date = obj.date;
                                 data[i].idArticle=hash(data[i].link);
                                 i++;
                             });
                             done();
                             resolve(data);
-                            console.log(data);
+                           // console.log(data);
                         }).catch(error=>{
                             reject(error);
                         });
