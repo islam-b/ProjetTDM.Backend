@@ -6,7 +6,8 @@ class UserDAO {
         return USER.create({
             idUser: user.idUser,
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            profilePicUrl: user.profilePicUrl
         });
     }
 
