@@ -81,7 +81,7 @@ router.get('/bookmarks',(req,res)=>{
                 res.status(200).json(articles);
             }).catch(e=>{
                 res.status(500).json({
-                    message:"Une erreur s'est produite."
+                    message:"Une erreur s'est produite."+e
                 });
             });
         }

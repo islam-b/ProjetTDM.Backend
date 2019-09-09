@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('tdm', 'root', '-0A9008a0', {
-    host: 'localhost',
-    //port: '8889',
+const sequelize = new Sequelize('h0005gcldwlq52oc', 'umkmu0isbjg6igkb', 'sj0dsqwcbdz31hy5', {
+    host: 'l7cup2om0gngra77.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    port: '3306',
     dialect: 'mysql',
     operatorsAliases: false,
     define: {
