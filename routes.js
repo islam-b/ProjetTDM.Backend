@@ -18,24 +18,27 @@ var beams_client = new Pusher({
 
 FRnews = [];
 ARnews = [];
-newsService.getVideos().then(v=>{
-    console.log(v);
-}).catch(e=>{
+let videos=[];
 
-});
-/*newsService.getFrenchNews().then(articles=>{
+newsService.getFrenchNews().then(articles=>{
     FRnews = articles;
     console.log("FINALLY"+FRnews.length);
 }).catch(e=>{
     FRnews = null;
-});*/
-/*newsService.getArabicNews().then(articles=>{
+});
+newsService.getArabicNews().then(articles=>{
     ARnews = articles;
     console.log("FINALLY"+ARnews.length);
 }).catch(e=>{
     console.log(e);
     ARnews = null;
-});*/
+});
+newsService.getVideos().then(v=>{
+    videos=v;
+    console.log(v);
+}).catch(e=>{
+
+});
 
 router.get('/news',(req,res)=>{
     let news = FRnews;
@@ -61,6 +64,10 @@ router.get('/categories',(req,res)=>{
 router.get('/sources',(req,res)=>{
     let categories = newsService.getSources();
     res.status(200).json(categories);
+});
+router.get('/videos',(req,res)=>{
+  
+    res.status(200).json(videos);
 });
 
 router.get('/bookmarks',(req,res)=>{

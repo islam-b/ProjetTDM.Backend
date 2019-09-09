@@ -488,19 +488,19 @@ class NewsService {
         let promises = [];
         //El Watan
         promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/sports','Sport'));
-       /* promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/economie','Economie'));
+        promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/economie','Economie'));
         promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/culture','Culture'));
-        promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/international','International'));*/
+        promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/international','International'));
         //Liberte
         promises.push(this.getLiberteNews('https://www.liberte-algerie.com/culture','Culture'));
-       /* promises.push(this.getLiberteNews('https://www.liberte-algerie.com/sport','Sport'));
+       promises.push(this.getLiberteNews('https://www.liberte-algerie.com/sport','Sport'));
         promises.push(this.getLiberteNews('https://www.liberte-algerie.com/international','International'));
-        promises.push(this.getLiberteNews('https://www.liberte-algerie.com/magazine','Divers'));*/
+        promises.push(this.getLiberteNews('https://www.liberte-algerie.com/magazine','Divers'));
         //L'expression
-       /* promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/internationale','International'));
+       promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/internationale','International'));
         promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/sports','Sport'));
         promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/culture','Culture'));
-        promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/societe','Societe'));*/
+        promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/societe','Societe'));
         promises.push(this.getLexpressionNews('https://www.lexpressiondz.com/economie','Economie'));
 
         return new Promise((resolve, reject) => {
@@ -547,7 +547,7 @@ class NewsService {
                     });
 
                 });
-                let shuffled = this.shuffle(articles);
+                let shuffled = helper.shuffle(articles);
                 resolve(shuffled);
             }).catch(error => {
                 reject(error);
@@ -587,10 +587,8 @@ class NewsService {
                                     imageUrl: imageUrl ? imageUrl : defaultImageUrl,
                                     title: title,
                                     link: link,
-                                    category: 'Video',
                                     lang: 'FR',
                                     source: 'TSA',
-                                    content: ''
 
                                 });
                                 promises.push(
@@ -604,7 +602,7 @@ class NewsService {
                                                 } else {
                                                     let $ = res.$;
 
-                                                    let vlink = $('.article__highlighted iframe').attr('src') || $('video>source').attr('src');
+                                                    let vlink = $('.article__highlighted iframe').attr('src');
                                                     let date = $('time').attr('datetime').toString();
                                                     let d=new Date(date);
                                                     let day = ("0"+ d.getDate()).slice(-2);
@@ -625,14 +623,29 @@ class NewsService {
                         });
                         let i=0;
                         Promise.all(promises).then(contents=>{
+
+
                             contents.forEach(obj=>{
-                                data[i].description = obj.video;
+                                let vLink = obj.video;
+
+                                if (vLink!==undefined && vLink.substr(0,30)=="https://www.youtube.com/embed/") {
+                                    console.log(vLink.substr(0,30));
+                                    data[i].idVideo = vLink.substr(30,12)
+
+                                } else {
+                                    data[i].idVideo = null;
+
+                                }
                                 data[i].date = obj.date;
-                                data[i].idArticle=hash(data[i].link);
                                 i++;
                             });
+
+                            let newdata = data.filter(a=>{
+                                return (null !== a.idVideo)
+                            });
+
                             done();
-                            resolve(data);
+                            resolve(newdata);
                            // console.log(data);
                         }).catch(error=>{
                             reject(error);
