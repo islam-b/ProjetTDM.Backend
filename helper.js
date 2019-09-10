@@ -27,6 +27,8 @@ class Helper {
         }
         return a;
     }
+
+
 }
 
 module.exports = Helper;

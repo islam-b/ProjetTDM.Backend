@@ -2,9 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad6b947b-f9cc-48b9-85d9-62887e988631" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/userDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/userDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/AUTHORS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-cache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-pseudos.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-shortcuts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-traversal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-webforms.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/nwmatcher-base.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/nwmatcher-noqsa.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/nwmatcher.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/.jshintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/lib/XMLHttpRequest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/service.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,11 +45,18 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1PuhktfmVpIgMgr687ISbJKu4R3" />
   <component name="PropertiesComponent">
@@ -30,6 +66,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -67,7 +104,9 @@
       <workItem from="1567288784074" duration="9429000" />
       <workItem from="1567337974977" duration="997000" />
       <workItem from="1567978222010" duration="624000" />
-      <workItem from="1568069933526" duration="910000" />
+      <workItem from="1568069933526" duration="1004000" />
+      <workItem from="1568134447368" duration="185000" />
+      <workItem from="1568134908345" duration="7571000" />
     </task>
     <servers />
   </component>

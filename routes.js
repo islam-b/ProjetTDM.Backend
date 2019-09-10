@@ -14,31 +14,86 @@ var beams_client = new Pusher({
     instanceId:'a88a7852-c501-40a4-be85-3b66edb00621',
     secretKey: '1B5DBA9A4179B0A7BB600D29D38A8750FE3543615FF2550B0155EE23CC8CC316'
 });
+var schedule = require('node-schedule');
 
 
-FRnews = [];
-ARnews = [];
+let FRnews = [];
+let ARnews = [];
 let videos=[];
+let previousFRlist=[];
+let previousARlist=[];
+let promises=[];
+promises.push(newsService.getFrenchNews());
+promises.push(newsService.getArabicNews());
+promises.push(newsService.getVideos());
+Promise.all(promises).then(array=>{
 
-newsService.getFrenchNews().then(articles=>{
-    FRnews = articles;
-    console.log("FINALLY"+FRnews.length);
-}).catch(e=>{
-    FRnews = null;
-});
-newsService.getArabicNews().then(articles=>{
-    ARnews = articles;
-    console.log("FINALLY"+ARnews.length);
-}).catch(e=>{
-    console.log(e);
-    ARnews = null;
-});
-newsService.getVideos().then(v=>{
-    videos=v;
-    console.log(v);
-}).catch(e=>{
+    FRnews = array[0];
+    ARnews = array[1];
+    videos=array[2];
+    Object.assign(previousFRlist,FRnews);
+    Object.assign(previousARlist,ARnews);
 
+    schedule.scheduleJob('*/30 * * * 1-5', function(firedate){
+        console.log("\n\n*******************************"+firedate+"*************************\n\n");
+        updateArticles();
+
+    });
 });
+function updateArticles() {
+    newsService.getFrenchNews().then(articles=>{
+        Object.assign(previousFRlist,FRnews);
+        FRnews = articles;
+        notifyChanges(previousFRlist,FRnews);
+        console.log("FINALLY"+FRnews.length);
+    }).catch(e=>{
+        FRnews = null;
+    });
+    newsService.getArabicNews().then(articles=>{
+        Object.assign(previousARlist,ARnews);
+        ARnews = articles;
+        notifyChanges(previousARlist,ARnews);
+        console.log("FINALLY"+ARnews.length);
+    }).catch(e=>{
+        console.log(e);
+        ARnews = null;
+    });
+    newsService.getVideos().then(v=>{
+        videos=v;
+        console.log(v);
+    }).catch(e=>{
+
+    });
+}
+function notifyChanges(oldList,newsList) {
+
+    let changes=[];
+    newsList.forEach(newArticle=>{
+        let found=oldList.find(oldArticle=>{
+            return oldArticle.idArticle === newArticle.idArticle
+        });
+        if (found===null) changes.push(newArticle)
+    });
+
+    changes.forEach(item=>{
+        let keyevent = "CATEGORIE"+hash(item.category);
+        let keychannel = "SOURCE"+hash(item.source);
+        console.log(keyevent + "\n"+keychannel);
+
+        beams_client.publishToInterests([keychannel+keyevent],{
+            fcm:{
+                notification:{
+                    title:item.title,
+                    body:item.description
+                }
+            }
+        }).then(publichRES=>{
+            console.log('JUST puiblished article ',publichRES.publishId+" article:"+item.title)
+        }).catch(e=>{
+            console.log("error "+e)
+        });
+    });
+}
 
 router.get('/news',(req,res)=>{
     let news = FRnews;
@@ -50,7 +105,10 @@ router.get('/news',(req,res)=>{
                 return n.category === req.query.category;
             });
         } else filtered = news;
-        res.status(200).json(filtered);
+        let page =0;
+        if(req.query.page!==null) page = parseInt(req.query.page);
+        let array  =filtered.slice(page * 10, (page + 1) * 10);
+        res.status(200).json(array);
     }
     else res.status(500).json(null);
 });

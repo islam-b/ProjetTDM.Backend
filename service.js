@@ -488,7 +488,7 @@ class NewsService {
         let promises = [];
         //El Watan
         promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/sports','Sport'));
-        promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/economie','Economie'));
+       promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/economie','Economie'));
         promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/culture','Culture'));
         promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/international','International'));
         //Liberte
@@ -524,7 +524,7 @@ class NewsService {
         let articles = [];
         let promises = [];
         //El Chourouk
-        promises.push(this.getElChouroukNews('https://www.echoroukonline.com/iktisad/','اقتصاد'));
+       promises.push(this.getElChouroukNews('https://www.echoroukonline.com/iktisad/','اقتصاد'));
         promises.push(this.getElChouroukNews('https://www.echoroukonline.com/world/','العالم'));
         promises.push(this.getElChouroukNews('https://www.echoroukonline.com/sport/riyada-alamia/','رياضة'));
         promises.push(this.getElChouroukNews('https://www.echoroukonline.com/society/','مجتمع'));
