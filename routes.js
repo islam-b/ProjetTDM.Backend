@@ -34,12 +34,12 @@ Promise.all(promises).then(array=>{
     Object.assign(previousFRlist,FRnews);
     Object.assign(previousARlist,ARnews);
 
-    schedule.scheduleJob('*/30 * * * 1-5', function(firedate){
+    schedule.scheduleJob('/30 * * * 1-5', function(firedate){
         console.log("\n\n*******************************"+firedate+"*************************\n\n");
         updateArticles();
-
     });
 });
+
 function updateArticles() {
     newsService.getFrenchNews().then(articles=>{
         Object.assign(previousFRlist,FRnews);
@@ -105,10 +105,10 @@ router.get('/news',(req,res)=>{
                 return n.category === req.query.category;
             });
         } else filtered = news;
-        let page =0;
+        /*let page =0;
         if(req.query.page!==null) page = parseInt(req.query.page);
-        let array  =filtered.slice(page * 10, (page + 1) * 10);
-        res.status(200).json(array);
+        let array  =filtered.slice(page * 10, (page + 1) * 10);*/
+        res.status(200).json(filtered);
     }
     else res.status(500).json(null);
 });
@@ -148,6 +148,34 @@ router.get('/bookmarks',(req,res)=>{
             message:"Une erreur s'est produite."
         });
     });
+});
+
+router.delete('/bookmark/:id',(req,res)=>{
+    let userId= req.query.user;
+    userDAO.findUser(userId).then(user=>{
+        if(user!==null) {
+            bookmarkDAO.deleteBookmark(req.params.id,userId).then(deleted=>{
+                if(deleted) {
+                    res.status(200).json({
+                        message:"Signet supprimé."
+                    })
+                } else {
+                    res.status(404).json({
+                        message: "Signet non trouvé."
+                    });
+                }
+
+            }).catch(e=>{
+                res.status(500).json({
+                    message: "Une erreur s\'est produite."
+                });
+            });
+        } else {
+            res.status(404).json({
+                message: "Utilisateur non trouvé."
+            });
+        }
+    })
 });
 
 router.post('/user',(req,res)=>{

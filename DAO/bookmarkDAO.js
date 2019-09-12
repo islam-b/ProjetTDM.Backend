@@ -8,6 +8,12 @@ class BookmarkDAO {
             idArticle: idArticle
         });
     }
+
+    deleteBookmark(idArticle,idUser) {
+        return BOOKMARK.destroy({where: {
+            idUser: idUser, idArticle:idArticle}
+        })
+    }
 }
 
 module.exports = BookmarkDAO;

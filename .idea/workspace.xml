@@ -2,38 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad6b947b-f9cc-48b9-85d9-62887e988631" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/AUTHORS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/browser-request/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-cache.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-pseudos.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-shortcuts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-traversal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/modules/nwmatcher-webforms.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/nwmatcher-base.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/nwmatcher-noqsa.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nwmatcher/src/nwmatcher.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/.jshintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/lib/XMLHttpRequest.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/xmlhttprequest/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/bookmarkDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/bookmarkDAO.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/service.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -106,7 +77,9 @@
       <workItem from="1567978222010" duration="624000" />
       <workItem from="1568069933526" duration="1004000" />
       <workItem from="1568134447368" duration="185000" />
-      <workItem from="1568134908345" duration="7571000" />
+      <workItem from="1568134908345" duration="7890000" />
+      <workItem from="1568150105991" duration="188000" />
+      <workItem from="1568283702791" duration="921000" />
     </task>
     <servers />
   </component>
