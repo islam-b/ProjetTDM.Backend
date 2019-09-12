@@ -17,6 +17,14 @@ class Helper {
         return parseInt(parts[1]) + '/' + month + '/' + parts[2];
     }
 
+    static convertDateForElChourouk(date) {
+        let parts = date.split('-');
+        let months=["يناير", "فبراير", "آذار", "أبريل", "ماي", "يونيو" ,
+            "يوليو" , "أغسطس" , "سبتمبر" , "أكتوبر" ,"نوفمبر" , "ديسمبر"];
+        let index = parseInt(parts[1]) - 1;
+        return parts[0]+" "+months[index]+" "+parts[2]
+    }
+
     static shuffle(a) {
         var j, x, i;
         for (i = a.length - 1; i > 0; i--) {

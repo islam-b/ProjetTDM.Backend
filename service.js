@@ -39,27 +39,27 @@ class NewsService {
             {
                 title_fr:'Societe',
                 title_ar:'مجتمع',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                iconURL:'https://res.cloudinary.com/hftzhatr4/image/upload/v1568327354/tdm_project/categories_wp1950378.jpg'
             },{
                 title_fr:'Sport',
                 title_ar:'رياضة',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                iconURL:'https://res.cloudinary.com/hftzhatr4/image/upload/v1568327354/tdm_project/categories_sport_cat.jpg'
             },{
                 title_fr:'Economie',
                 title_ar:'اقتصاد',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                iconURL:'https://res.cloudinary.com/hftzhatr4/image/upload/v1568327354/tdm_project/categories_economie_cat.jpg'
             },{
                 title_fr:'International',
                 title_ar:'العالم',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                iconURL:'https://res.cloudinary.com/hftzhatr4/image/upload/v1568327354/tdm_project/categories_international_cat.jpg'
             },{
                 title_fr:'Culture',
                 title_ar:'ثقافة',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                iconURL:'https://res.cloudinary.com/hftzhatr4/image/upload/v1568327354/tdm_project/categories_culture_cat.jpg'
             },{
                 title_fr:'Divers',
                 title_ar:'منوعات',
-                iconURL:'https://icon-library.net/images/more-icon-png/more-icon-png-27.jpg'
+                iconURL:'https://res.cloudinary.com/hftzhatr4/image/upload/v1568327354/tdm_project/categories_divers_cat.jpg'
             }
         ];
         categories.forEach(c=>{c.idCategory=hash(c.title_fr);});
@@ -336,7 +336,7 @@ class NewsService {
                             let title = $$('h2>a').html();
                             let link = $$('h2>a').attr('href');
                             let description = $$('p').text();
-                            let date = $$('time').attr('datetime');
+                            let date = helper.convertDateForElChourouk($$('time').attr('datetime').substr(0,10));
                             //let category = 'الجزائر';
                             data.push({
                                 imageUrl: imageUrl ? imageUrl : defaultImageUrl,
@@ -484,7 +484,7 @@ class NewsService {
     // arabe liberte https://www.liberte-algerie.com/liberte-%D8%B9%D8%B1%D8%A8%D9%8A -> Divers
 
     getFrenchNews() {
-        let articles = [];
+       let articles = [];
         let promises = [];
         //El Watan
         promises.push(this.getElWatanNews('https://www.elwatan.com/category/edition/sports','Sport'));
@@ -525,7 +525,7 @@ class NewsService {
         let promises = [];
         //El Chourouk
        promises.push(this.getElChouroukNews('https://www.echoroukonline.com/iktisad/','اقتصاد'));
-        promises.push(this.getElChouroukNews('https://www.echoroukonline.com/world/','العالم'));
+       promises.push(this.getElChouroukNews('https://www.echoroukonline.com/world/','العالم'));
         promises.push(this.getElChouroukNews('https://www.echoroukonline.com/sport/riyada-alamia/','رياضة'));
         promises.push(this.getElChouroukNews('https://www.echoroukonline.com/society/','مجتمع'));
         promises.push(this.getElChouroukNews('https://www.echoroukonline.com/takafa-art/','ثقافة'));
