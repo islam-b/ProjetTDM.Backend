@@ -483,6 +483,29 @@ class NewsService {
 
     // arabe liberte https://www.liberte-algerie.com/liberte-%D8%B9%D8%B1%D8%A8%D9%8A -> Divers
 
+    getNews() {
+        return new Promise((resolve,reject)=>{
+            let promises = [];
+            promises.push(this.getFrenchNews());
+            promises.push(this.getArabicNews());
+            let articles = [];
+            Promise.all(promises).then(arrays=> {
+                arrays.forEach(array=>{
+                    array.forEach(article=>{
+                        articles.push(article);
+                    });
+
+                });
+                let shuffled = helper.shuffle(articles);
+                resolve(shuffled);
+            }).catch(error => {
+                reject(error);
+            });
+      
+        });
+    }
+
+
     getFrenchNews() {
        let articles = [];
         let promises = [];

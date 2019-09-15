@@ -17,22 +17,18 @@ var beams_client = new Pusher({
 var schedule = require('node-schedule');
 
 
-let FRnews = [];
-let ARnews = [];
+let news = [];
 let videos=[];
-let previousFRlist=[];
-let previousARlist=[];
+let previousList=[];
 let promises=[];
-promises.push(newsService.getFrenchNews());
-promises.push(newsService.getArabicNews());
+promises.push(newsService.getNews());
 promises.push(newsService.getVideos());
 Promise.all(promises).then(array=>{
 
-    FRnews = array[0];
-    ARnews = array[1];
-    videos=array[2];
-    Object.assign(previousFRlist,FRnews);
-    Object.assign(previousARlist,ARnews);
+    news = array[0];
+    videos = array[1];
+    Object.assign(previousList,news);
+   
 
     schedule.scheduleJob('/30 * * * 1-5', function(firedate){
         console.log("\n\n*******************************"+firedate+"*************************\n\n");
@@ -41,22 +37,13 @@ Promise.all(promises).then(array=>{
 });
 
 function updateArticles() {
-    newsService.getFrenchNews().then(articles=>{
-        Object.assign(previousFRlist,FRnews);
-        FRnews = articles;
-        notifyChanges(previousFRlist,FRnews);
-        console.log("FINALLY"+FRnews.length);
+    newsService.getNews().then(articles=>{
+        Object.assign(previousList,news);
+        news = articles;
+        notifyChanges(previousList,news);
+        console.log("FINALLY"+news.length);
     }).catch(e=>{
-        FRnews = null;
-    });
-    newsService.getArabicNews().then(articles=>{
-        Object.assign(previousARlist,ARnews);
-        ARnews = articles;
-        notifyChanges(previousARlist,ARnews);
-        console.log("FINALLY"+ARnews.length);
-    }).catch(e=>{
-        console.log(e);
-        ARnews = null;
+        news = null;
     });
     newsService.getVideos().then(v=>{
         videos=v;
@@ -96,8 +83,8 @@ function notifyChanges(oldList,newsList) {
 }
 
 router.get('/news',(req,res)=>{
-    let news = FRnews;
-    if (req.query.lang!=="FR") news = ARnews;
+    let news = news;
+    //if (req.query.lang!=="FR") news = ARnews;
     if (news !== null) {
         let filtered = [];
         if (req.query.category) {
