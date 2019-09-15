@@ -83,15 +83,15 @@ function notifyChanges(oldList,newsList) {
 }
 
 router.get('/news',(req,res)=>{
-    let news = news;
+    let articles = news;
     //if (req.query.lang!=="FR") news = ARnews;
-    if (news !== null) {
+    if (articles !== null) {
         let filtered = [];
         if (req.query.category) {
-            filtered = news.filter(n => {
+            filtered = articles.filter(n => {
                 return n.category === req.query.category;
             });
-        } else filtered = news;
+        } else filtered = articles ;
         /*let page =0;
         if(req.query.page!==null) page = parseInt(req.query.page);
         let array  =filtered.slice(page * 10, (page + 1) * 10);*/
