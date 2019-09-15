@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('ls6ctt78odq9udww', ' pntl4l6gicnyyzuc', 'bmbyl358lxogg7yb', {
+const sequelize = new Sequelize('ls6ctt78odq9udww', 'pntl4l6gicnyyzuc', 'bmbyl358lxogg7yb', {
     host: 'q3vtafztappqbpzn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     port: '3306',
     dialect: 'mysql',
