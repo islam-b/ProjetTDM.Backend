@@ -82,13 +82,17 @@ function notifyChanges(oldList,newsList) {
     });
 }
 
-router.get('/news',(req,res)=>{
+router.post('/news',(req,res)=>{
     let articles = news;
     //if (req.query.lang!=="FR") news = ARnews;
     if (articles !== null) {
         let filtered = [];
-        if (req.query.category) {
+        if (req.body.categories) {
             filtered = articles.filter(n => {
+                let found = false;
+                req.body.categories.forEach(category=>{
+                    if (n.category === category) found 
+                });
                 return n.category === req.query.category;
             });
         } else filtered = articles ;
