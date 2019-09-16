@@ -168,9 +168,9 @@ router.delete('/bookmark/:id',(req,res)=>{
 router.post('/user',(req,res)=>{
     userDAO.findUser(req.body.idUser).then(u=>{
         if (u!==null) {
-            res.status(409).json({
-                message:"Utilisateur existant."
-            });
+            
+                res.status(200).json(u)
+            
         } else {
             userDAO.createUser(req.body).then(u=>{
                 res.status(200).json(u)
