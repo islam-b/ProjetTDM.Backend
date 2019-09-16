@@ -92,10 +92,10 @@ router.get('/news',(req,res)=>{
                 return n.category === req.query.category;
             });
         } else filtered = articles ;
-        /*let page =0;
+        let page =0;
         if(req.query.page!==null) page = parseInt(req.query.page);
-        let array  =filtered.slice(page * 10, (page + 1) * 10);*/
-        res.status(200).json(filtered);
+        let array  =filtered.slice(page * 10, (page + 1) * 10);
+        res.status(200).json(array);
     }
     else res.status(500).json(null);
 });
