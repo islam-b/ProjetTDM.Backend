@@ -91,7 +91,7 @@ router.post('/news',(req,res)=>{
             filtered = articles.filter(n => {
                 let found = false;
                 req.body.categories.forEach(category=>{
-                    if (n.category === category) found 
+                    if (n.category === category) found =true
                 });
                 return n.category === req.query.category;
             });
