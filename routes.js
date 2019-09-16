@@ -93,7 +93,7 @@ router.post('/news',(req,res)=>{
                 req.body.categories.forEach(category=>{
                     if (n.category === category) found =true
                 });
-                return n.category === req.query.category;
+                return found
             });
         } else filtered = articles ;
         let page =0;
