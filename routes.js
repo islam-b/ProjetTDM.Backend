@@ -69,10 +69,18 @@ function notifyChanges(oldList,newsList) {
 
         beams_client.publishToInterests([keychannel+keyevent],{
             fcm:{
-                notification:{
-                    title:item.title,
-                    body:item.description
-                }
+                    data: {
+                                imageUrl: item.imageUrl,
+                                title: item.title,
+                                description: item.description,
+                                link: item.link,
+                                content: item.content,
+                                date: item.date,
+                                category: item.category,
+                                lang: item.lang,
+                                source: item.source
+                            }
+              
             }
         }).then(publichRES=>{
             console.log('JUST puiblished article ',publichRES.publishId+" article:"+item.title)
@@ -232,16 +240,17 @@ router.post('/bookmark',(req,res)=> {
     });
 });
 
-router.get('/post',(req,res)=>{
+router.post('/notif',(req,res)=>{
     let news ={
         imageUrl: 'http://www.sclance.com/pngs/no-image-png/no_image_png_935227.png',
-                                title: "hello",
-                                description: "hello world",
-                                link: "link",
-                                date: "10/10/2010",
-                                category: "Sport",
-                                lang: 'FR',
-                                source: 'El Watan'
+                                title: req.body.title,
+                                description: req.body.description,
+                                link: req.body.link,
+                                content: req.body.content,
+                                date: req.body.date,
+                                category: req.body.category,
+                                lang: req.body.lang,
+                                source: req.body.source
     };
 let keyevent = "CATEGORIE"+hash(news.category);
 let keychannel = "SOURCE"+hash(news.source);
@@ -249,9 +258,17 @@ console.log(keyevent + "\n"+keychannel);
 
 beams_client.publishToInterests([keychannel+keyevent],{
     fcm:{
-        notification:{
-            title:news.title,
-            body:news.description
+    
+        data: {
+                                imageUrl: 'http://www.sclance.com/pngs/no-image-png/no_image_png_935227.png',
+                                title: req.body.title,
+                                description: req.body.description,
+                                link: req.body.link,
+                                content: req.body.content,
+                                date: req.body.date,
+                                category: req.body.category,
+                                lang: req.body.lang,
+                                source: req.body.source
         }
     }
 }).then(publichRES=>{
